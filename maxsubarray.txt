@@ -1,0 +1,30 @@
+vector<int> maxSubarray(vector<int> arr) {
+    int current = arr[0];
+    int maxSub = arr[0];
+
+    int maxElement = arr[0];
+    int maxSubseq = 0;
+
+    for (int i = 1; i < arr.size(); i++) {
+        // Maximum subarray - Kadane's Algorithm
+        current = max(arr[i], current + arr[i]);
+        maxSub = max(maxSub, current);
+
+        // Maximum subsequence
+        maxElement = max(maxElement, arr[i]);
+    }
+
+    // If there are positive numbers, add all positive numbers
+    for (int x : arr) {
+        if (x > 0) {
+            maxSubseq += x;
+        }
+    }
+
+    // If all numbers are negative, choose the largest negative
+    if (maxSubseq == 0) {
+        maxSubseq = maxElement;
+    }
+
+    return {maxSub, maxSubseq};
+}
