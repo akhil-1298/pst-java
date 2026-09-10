@@ -1,0 +1,14 @@
+public static int count(ArrayList mylist, String classname) {
+    int count = 0;
+
+    for (Object element : mylist) {
+        if (classname.equals("Student") && element instanceof Student)
+            count++;
+        if (classname.equals("Rockstar") && element instanceof Rockstar)
+            count++;
+        if (classname.equals("Hacker") && element instanceof Hacker)
+            count++;
+    }
+
+    return count;
+}
