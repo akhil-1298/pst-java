@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    static int longestPalindrome(String s, int start, int n) {
+        int end = start + n - 1;
+        int best = 1;
+
+        for (int center = start; center <= end; center++) {
+
+            int left = center;
+            int right = center;
+
+            while (left >= start && right <= end &&
+                   s.charAt(left) == s.charAt(right)) {
+                best = Math.max(best, right - left + 1);
+                left--;
+                right++;
+            }
+
+            left = center;
+            right = center + 1;
+
+            while (left >= start && right <= end &&
+                   s.charAt(left) == s.charAt(right)) {
+                best = Math.max(best, right - left + 1);
+                left--;
+                right++;
+            }
+        }
+
+        return best;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+        String s = br.readLine();
+
+        String doubled = s + s;
+
+        StringBuilder out = new StringBuilder();
+
+        for (int i = 0; i < n; i++) {
+            int answer = longestPalindrome(doubled, i, n);
+            out.append(answer).append('\n');
+        }
+
+        System.out.print(out);
+    }
+}
